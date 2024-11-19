@@ -1,4 +1,26 @@
+:root{
+  h1{
+    font-family: PlayfairRegular;
+  }
+  h2{
+font-family: PlayfairRegular;
+  }
+}
+
+
+
 *{
   padding: 0;
   margin: 0;
 }
+
+@font-face {
+  font-family: 'PlayfairRegular';
+  src: url('./assets/fonts/static/PlayfairDisplay-Regular.ttf') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* body {
+  font-family: 'Playfair Display', sans-serif;
+} */
