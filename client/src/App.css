@@ -58,4 +58,9 @@ button {
   border-style: none;
   font-size: 1rem;
   font-weight: bold;
+  cursor: pointer;
+  &:hover{
+    color: white;
+    background-color: black;
+  }
 }

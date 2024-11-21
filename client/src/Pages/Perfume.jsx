@@ -14,11 +14,17 @@ import { motion } from "framer-motion";
 export default function Perfume() {
     const [backgroundColor, setBackgroundColor] = useState("#eb9d0e");
     const [isProductImageVisible, setIsProductImageVisible] = useState(false);
+    const [videoHasEnded, setVideoHasEnded] = useState(false);
     const videoRef = useRef(null);
     const scrollTimeoutRef = useRef(null);
     const productsRef = useRef(null);
     const productsRef2 = useRef(null);
     const productsWrapperRef = useRef(null); 
+
+     const handleVideoEnded = () => {
+       setVideoHasEnded(true);
+       console.log("Video has finished.");
+     };
     
   
      const getProductImage = (backgroundColor) => {
@@ -60,12 +66,13 @@ export default function Perfume() {
        };
      }, []);
 
-  
+
 
     useEffect(() => {
       const handleScroll = () => {
         if (videoRef.current) {
           videoRef.current.play();
+          videoRef.current.playbackRate = 1.5;
         }
 
         if (scrollTimeoutRef.current) {
@@ -110,8 +117,6 @@ export default function Perfume() {
         console.log("Changing to red");
       }
     }
-
-  
          
       };
 
@@ -181,9 +186,10 @@ export default function Perfume() {
           ref={videoRef}
           src={Video}
           width="100%"
-          height="auto"
+          height="100%"
           muted
-          loop
+          style={{ objectFit: "cover" }}
+          onEnded={handleVideoEnded}
         />
       </StyledVideo>
 
@@ -454,11 +460,12 @@ const StyledProducts = styled.div`
   height: 130vh;
   
   position: relative;
-  transition: background-color 1s ease;
+ 
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 
   .mareqee-background {
     position: absolute;
@@ -548,7 +555,7 @@ const StyledProducts2 = styled.div`
   height: 130vh;
 
   position: relative;
-  transition: background-color 1s ease;
+
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -640,7 +647,6 @@ const StyledProducts3 = styled.div`
   height: 130vh;
 
   position: relative;
-  transition: background-color 1s ease;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -731,10 +737,9 @@ const StyledProducts3 = styled.div`
 const StyledProductsWrapper = styled.div`
   position: relative;
   background-color: ${(props) => props.$backgroundColor};
+  transition: background-color 1s ease;
   z-index: 1;
   overflow: hidden;
-
-  
 `;
 
 const StyledProdcutImage = styled.div`
@@ -756,7 +761,7 @@ const StyledProdcutImage = styled.div`
 
   @media (max-width: 640px) {
     img {
-      width: 700px;
+      display: none;
     }
   }
 `;
@@ -772,13 +777,21 @@ const StyledProdcut4 = styled.div`
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
+    gap: 2rem;
     padding-left: 20px;
     h1 {
-      color: white;
       font-size: 5rem;
       max-width: 15ch;
     }
    
+  }
+
+  @media (max-width: 640px) {
+      .product4_container {
+    h1{
+      font-size: 4rem;
+    }
+  }
   }
 `;
 
