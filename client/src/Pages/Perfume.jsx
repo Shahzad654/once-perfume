@@ -9,6 +9,8 @@ import Product1 from "../assets/images/product1.webp";
 import Product2 from "../assets/images/product2.webp";
 import Product3 from "../assets/images/product3.webp";
 import Video from "../assets/images/video.mp4";
+
+
 import { motion } from "framer-motion";
 
 export default function Perfume() {
@@ -52,7 +54,7 @@ export default function Perfume() {
              }
            });
          },
-         { threshold: 0.25 } 
+         { threshold: 0.2 } 
        );
 
        if (productsWrapperRef.current) {
@@ -194,227 +196,211 @@ export default function Perfume() {
         />
       </StyledVideo>
 
-      {videoHasEnded && (
-        <>
-          <StyledProductsWrapper
-            ref={productsWrapperRef}
-            $backgroundColor={backgroundColor}
-          >
-            <StyledProducts ref={productsRef}>
-              <div className="mareqee-background">
-                <Marquee
-                  direction="left"
-                  speed={50}
-                  style={{
-                    color: "transparent",
-                    WebkitTextStroke: "2px white",
-                    textFillColor: "transparent",
-                    fontSize: "18rem",
-                  }}
-                >
-                  Once Perfume Once Perfume Once Perfume Once Perfume Once
-                  Perfume Once Perfume Once Perfume Once Perfume Once Perfume
-                  Once Perfume
-                </Marquee>
-              </div>
-
-              <div className="product_container">
-                <div className="product_container">
-                  <motion.div
-                    className="product_content"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: -50 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 1 }}
-                  >
-                    <h1>
-                      Le Male Elixir <span>le feu sacré à même la peau</span>{" "}
-                    </h1>
-                    <h5>parfum</h5>
-                    <p>
-                      Le Male Elixir se pare d'une marinière striée d’or aux
-                      reflets transparents ambrés, révélant sa carrure saillante
-                      et sa peau cuivrée. Dans ce flacon de désir : un intense
-                      parfum ambré aromatique boisé. Sa fragrance embrase
-                      l'atmosphère, son jus réveille la peau, le Male Elixir
-                      enivre les sens, prêt à vous faire fondre.
-                    </p>
-                    <button>Shop</button>
-                  </motion.div>
-
-                  <motion.div
-                    className="product_demo"
-                    // initial={{ opacity: 0, y: 50 }}
-                    // whileInView={{ opacity: 1, y: 0 }}
-                    // viewport={{ once: true, amount: 1 }}
-                    // transition={{
-                    //   duration: 3,
-                    // }}
-                  >
-                    <img src={ProductDemo} alt="" />
-                  </motion.div>
-                </div>
-              </div>
-            </StyledProducts>
-
-            <StyledProducts2 ref={productsRef2}>
-              <div className="mareqee-background">
-                <Marquee
-                  direction="left"
-                  speed={50}
-                  style={{
-                    color: "transparent",
-                    WebkitTextStroke: "2px white",
-                    textFillColor: "transparent",
-                    fontSize: "18rem",
-                  }}
-                >
-                  Once Perfume Once Perfume Once Perfume Once Perfume Once
-                  Perfume Once Perfume Once Perfume Once Perfume Once Perfume
-                  Once Perfume
-                </Marquee>
-              </div>
-
-              <div className="product_container">
-                <div className="product_container">
-                  <motion.div
-                    className="product_demo"
-                    // initial={{ opacity: 0, y: 50 }}
-                    // whileInView={{ opacity: 1, y: 0 }}
-                    // viewport={{ once: true, amount: 1 }}
-                    // transition={{
-                    //   duration: 3,
-                    // }}
-                  >
-                    <img src={ProductDemo2} alt="" />
-                  </motion.div>
-                  <motion.div
-                    className="product_content"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: -50 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 1 }}
-                  >
-                    <h1>
-                      Le Male Elixir <span>le feu sacré à même la peau</span>{" "}
-                    </h1>
-                    <h5>parfum</h5>
-                    <p>
-                      Le Male Elixir se pare d'une marinière striée d’or aux
-                      reflets transparents ambrés, révélant sa carrure saillante
-                      et sa peau cuivrée. Dans ce flacon de désir : un intense
-                      parfum ambré aromatique boisé. Sa fragrance embrase
-                      l'atmosphère, son jus réveille la peau, le Male Elixir
-                      enivre les sens, prêt à vous faire fondre.
-                    </p>
-                    <button>Shop</button>
-                  </motion.div>
-                </div>
-              </div>
-            </StyledProducts2>
-
-            <StyledProducts3>
-              <div className="mareqee-background">
-                <Marquee
-                  direction="left"
-                  speed={50}
-                  style={{
-                    color: "transparent",
-                    WebkitTextStroke: "2px white",
-                    textFillColor: "transparent",
-                    fontSize: "18rem",
-                  }}
-                >
-                  Once Perfume Once Perfume Once Perfume Once Perfume Once
-                  Perfume Once Perfume Once Perfume Once Perfume Once Perfume
-                  Once Perfume
-                </Marquee>
-              </div>
-
-              <div className="product_container">
-                <div className="product_container">
-                  <motion.div
-                    className="product_content"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: -50 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 1 }}
-                  >
-                    <h1>
-                      Le Male Elixir <span>le feu sacré à même la peau</span>{" "}
-                    </h1>
-                    <h5>parfum</h5>
-                    <p>
-                      Le Male Elixir se pare d'une marinière striée d’or aux
-                      reflets transparents ambrés, révélant sa carrure saillante
-                      et sa peau cuivrée. Dans ce flacon de désir : un intense
-                      parfum ambré aromatique boisé. Sa fragrance embrase
-                      l'atmosphère, son jus réveille la peau, le Male Elixir
-                      enivre les sens, prêt à vous faire fondre.
-                    </p>
-                    <button>Shop</button>
-                  </motion.div>
-
-                  <motion.div
-                    className="product_demo"
-                    // initial={{ opacity: 0, y: 50 }}
-                    // whileInView={{ opacity: 1, y: 0 }}
-                    // viewport={{ once: true, amount: 1 }}
-                    // transition={{
-                    //   duration: 3,
-                    // }}
-                  >
-                    <img src={ProductDemo3} alt="" />
-                  </motion.div>
-                </div>
-              </div>
-            </StyledProducts3>
-
-            <StyledProdcutImage
+      <StyledProductsWrapper
+        ref={productsWrapperRef}
+        $backgroundColor={backgroundColor}
+      >
+        <StyledProducts ref={productsRef}>
+          <div className="mareqee-background">
+            <Marquee
+              direction="left"
+              speed={50}
               style={{
-                display: isProductImageVisible ? "block" : "none",
+                color: "transparent",
+                WebkitTextStroke: "2px white",
+                textFillColor: "transparent",
+                fontSize: "18rem",
               }}
             >
-              <img src={getProductImage(backgroundColor)} alt="Product" />
-            </StyledProdcutImage>
-          </StyledProductsWrapper>
+              Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
+              Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
+            </Marquee>
+          </div>
 
-          <StyledProdcut4>
-            <div className="product4_container">
-              <h1>
-                Entrez dans la salle des machines et devenez membre de
-                l'équipage
-              </h1>
-              <button>Shop</button>
+          <div className="product_container">
+            <div className="product_container">
+              <motion.div
+                className="product_content"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: -50 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 1 }}
+              >
+                <h1>
+                  Le Male Elixir <span>le feu sacré à même la peau</span>{" "}
+                </h1>
+                <h5>parfum</h5>
+                <p>
+                  Le Male Elixir se pare d'une marinière striée d’or aux reflets
+                  transparents ambrés, révélant sa carrure saillante et sa peau
+                  cuivrée. Dans ce flacon de désir : un intense parfum ambré
+                  aromatique boisé. Sa fragrance embrase l'atmosphère, son jus
+                  réveille la peau, le Male Elixir enivre les sens, prêt à vous
+                  faire fondre.
+                </p>
+                <button>Shop</button>
+              </motion.div>
+
+              <motion.div
+                className="product_demo"
+                initial={{ opacity: 0, y: 150 }}
+                whileInView={{ opacity: 1, y: 50 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 3 }}
+              >
+                <img src={ProductDemo} alt="" />
+              </motion.div>
             </div>
-          </StyledProdcut4>
+          </div>
+        </StyledProducts>
 
-          <StyledProdcut5>
-            <div className="product5_container">
-              <div className="mareqee-background">
-                <Marquee
-                  direction="left"
-                  speed={50}
-                  style={{
-                    color: "transparent",
-                    WebkitTextStroke: "2px white",
-                    textFillColor: "transparent",
-                    fontSize: "18rem",
-                  }}
-                >
-                  Once Perfume Once Perfume Once Perfume Once Perfume Once
-                  Perfume Once Perfume Once Perfume Once Perfume Once Perfume
-                  Once Perfume
-                </Marquee>
-              </div>
-              <button>Shop</button>
+        <StyledProducts2 ref={productsRef2}>
+          <div className="mareqee-background">
+            <Marquee
+              direction="left"
+              speed={50}
+              style={{
+                color: "transparent",
+                WebkitTextStroke: "2px white",
+                textFillColor: "transparent",
+                fontSize: "18rem",
+              }}
+            >
+              Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
+              Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
+            </Marquee>
+          </div>
+
+          <div className="product_container">
+            <div className="product_container">
+              <motion.div
+                className="product_demo"
+                initial={{ opacity: 0, y: 150 }}
+                whileInView={{ opacity: 1, y: 50 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 3 }}
+              >
+                <img src={ProductDemo2} alt="" />
+              </motion.div>
+              <motion.div
+                className="product_content"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: -50 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 1 }}
+              >
+                <h1>
+                  Le Male Elixir <span>le feu sacré à même la peau</span>{" "}
+                </h1>
+                <h5>parfum</h5>
+                <p>
+                  Le Male Elixir se pare d'une marinière striée d’or aux reflets
+                  transparents ambrés, révélant sa carrure saillante et sa peau
+                  cuivrée. Dans ce flacon de désir : un intense parfum ambré
+                  aromatique boisé. Sa fragrance embrase l'atmosphère, son jus
+                  réveille la peau, le Male Elixir enivre les sens, prêt à vous
+                  faire fondre.
+                </p>
+                <button>Shop</button>
+              </motion.div>
             </div>
-          </StyledProdcut5>
+          </div>
+        </StyledProducts2>
 
-          <StyledProdcut6></StyledProdcut6>
+        <StyledProducts3>
+          <div className="mareqee-background">
+            <Marquee
+              direction="left"
+              speed={50}
+              style={{
+                color: "transparent",
+                WebkitTextStroke: "2px white",
+                textFillColor: "transparent",
+                fontSize: "18rem",
+              }}
+            >
+              Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
+              Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
+            </Marquee>
+          </div>
 
-        </>
-      )}
+          <div className="product_container">
+            <div className="product_container">
+              <motion.div
+                className="product_content"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: -50 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 1 }}
+              >
+                <h1>
+                  Le Male Elixir <span>le feu sacré à même la peau</span>{" "}
+                </h1>
+                <h5>parfum</h5>
+                <p>
+                  Le Male Elixir se pare d'une marinière striée d’or aux reflets
+                  transparents ambrés, révélant sa carrure saillante et sa peau
+                  cuivrée. Dans ce flacon de désir : un intense parfum ambré
+                  aromatique boisé. Sa fragrance embrase l'atmosphère, son jus
+                  réveille la peau, le Male Elixir enivre les sens, prêt à vous
+                  faire fondre.
+                </p>
+                <button>Shop</button>
+              </motion.div>
+
+              <motion.div
+                className="product_demo"
+                initial={{ opacity: 0, y: 150 }}
+                whileInView={{ opacity: 1, y: 50 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 3 }}
+              >
+                <img src={ProductDemo3} alt="" />
+              </motion.div>
+            </div>
+          </div>
+        </StyledProducts3>
+
+        <StyledProdcutImage
+          style={{
+            display: isProductImageVisible ? "block" : "none",
+          }}
+        >
+          <img src={getProductImage(backgroundColor)} alt="Product" />
+        </StyledProdcutImage>
+      </StyledProductsWrapper>
+
+      <StyledProdcut4>
+        <div className="product4_container">
+          <h1>
+            Entrez dans la salle des machines et devenez membre de l'équipage
+          </h1>
+          <button>Shop</button>
+        </div>
+      </StyledProdcut4>
+
+      <StyledProdcut5>
+        <div className="product5_container">
+          <div className="mareqee-background">
+            <Marquee
+              direction="left"
+              speed={50}
+              style={{
+                color: "transparent",
+                WebkitTextStroke: "2px white",
+                textFillColor: "transparent",
+                fontSize: "18rem",
+              }}
+            >
+              Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
+              Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
+            </Marquee>
+          </div>
+          <button>Shop</button>
+        </div>
+      </StyledProdcut5>
+
+      <StyledProdcut6></StyledProdcut6>
     </MainContainer>
   );
 }
@@ -467,11 +453,9 @@ const StyledVideo = styled.div`
 `;
 
 const StyledProducts = styled.div`
-  width: 100%;
   height: 130vh;
-  
   position: relative;
- 
+
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -498,9 +482,10 @@ const StyledProducts = styled.div`
     gap: 1rem;
     z-index: 1;
     width: 100%;
+    flex-wrap: wrap;
 
     .product_content {
-      flex-basis: 50%;
+      flex-basis: 45%;
       flex-grow: 0;
       flex-shrink: 0;
       display: flex;
@@ -522,7 +507,6 @@ const StyledProducts = styled.div`
       h5 {
         font-weight: bold;
         font-size: 2rem;
-       
       }
 
       p {
@@ -532,7 +516,7 @@ const StyledProducts = styled.div`
     }
 
     .product_demo {
-      flex-basis: 50%;
+      flex-basis: 45%;
       flex-grow: 0;
       flex-shrink: 0;
       img {
@@ -543,26 +527,43 @@ const StyledProducts = styled.div`
   }
 
   @media (max-width: 640px) {
-    .product_container{
-      .product_content{
+    .product_container {
+      .product_content {
         flex-basis: 100%;
         justify-content: center;
         align-items: center;
         padding-left: 0;
-        h1{
+        h1 {
           text-align: center;
+          font-size: 3rem;
+        }
+        h5{
+          font-size: 1.5rem;
+        }
+        p{
+          text-align: center;
+        }
+      }
+      .product_demo {
+        flex-basis: 100%;
+      }
+    }
+  }
+
+  @media (min-width: 640px) and (max-width: 1024px) {
+    .product_container {
+      .product_content {
+       
+        h1 {
           font-size: 4rem;
         }
       }
-      .product_demo{
-        flex-basis: 100%;
-      }
+     
     }
   }
 `;
 
 const StyledProducts2 = styled.div`
-  width: 100%;
   height: 130vh;
 
   position: relative;
@@ -589,12 +590,13 @@ const StyledProducts2 = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     gap: 1rem;
     z-index: 1;
     width: 100%;
 
     .product_content {
-      flex-basis: 50%;
+      flex-basis: 45%;
       flex-grow: 0;
       flex-shrink: 0;
       display: flex;
@@ -624,7 +626,7 @@ const StyledProducts2 = styled.div`
     }
 
     .product_demo {
-      flex-basis: 50%;
+      flex-basis: 45%;
       flex-grow: 0;
       flex-shrink: 0;
       img {
@@ -636,14 +638,22 @@ const StyledProducts2 = styled.div`
 
   @media (max-width: 640px) {
     .product_container {
+      flex-direction: column-reverse;
       .product_content {
         flex-basis: 100%;
         justify-content: center;
         align-items: center;
         padding-left: 0;
+        /* margin-top: 120px; */
         h1 {
           text-align: center;
-          font-size: 4rem;
+          font-size: 3rem;
+        }
+        h5 {
+          font-size: 1.5rem;
+        }
+        p {
+          text-align: center;
         }
       }
       .product_demo {
@@ -651,10 +661,20 @@ const StyledProducts2 = styled.div`
       }
     }
   }
+
+  @media (min-width: 640px) and (max-width: 1024px) {
+    .product_container {
+      .product_content {
+        h1 {
+          font-size: 4rem;
+        }
+      }
+    }
+  }
 `;
 
 const StyledProducts3 = styled.div`
-  width: 100%;
+ 
   height: 130vh;
 
   position: relative;
@@ -680,12 +700,13 @@ const StyledProducts3 = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     gap: 1rem;
     z-index: 1;
     width: 100%;
 
     .product_content {
-      flex-basis: 50%;
+      flex-basis: 45%;
       flex-grow: 0;
       flex-shrink: 0;
       display: flex;
@@ -716,7 +737,7 @@ const StyledProducts3 = styled.div`
     }
 
     .product_demo {
-      flex-basis: 50%;
+      flex-basis: 45%;
       flex-grow: 0;
       flex-shrink: 0;
       img {
@@ -735,11 +756,27 @@ const StyledProducts3 = styled.div`
         padding-left: 0;
         h1 {
           text-align: center;
-          font-size: 4rem;
+          font-size: 3rem;
+        }
+        h5 {
+          font-size: 1.5rem;
+        }
+        p {
+          text-align: center;
         }
       }
       .product_demo {
         flex-basis: 100%;
+      }
+    }
+  }
+
+  @media (min-width: 640px) and (max-width: 1024px) {
+    .product_container {
+      .product_content {
+        h1 {
+          font-size: 4rem;
+        }
       }
     }
   }
@@ -771,9 +808,7 @@ const StyledProdcutImage = styled.div`
   }
 
   @media (max-width: 640px) {
-    img {
-      display: none;
-    }
+    
   }
 `;
 
@@ -800,10 +835,20 @@ const StyledProdcut4 = styled.div`
   @media (max-width: 640px) {
       .product4_container {
     h1{
-      font-size: 4rem;
+      font-size: 3rem;
+      margin-top: 2rem;
     }
   }
+}
+
+  @media (min-width: 640px) and (max-width: 1024px) {
+      .product4_container {
+    h1{
+      font-size: 4rem;
+      margin-top: 1rem;
+    }
   }
+}
 `;
 
 const StyledProdcut5 = styled.div`
