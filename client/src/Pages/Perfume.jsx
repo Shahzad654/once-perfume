@@ -12,12 +12,23 @@ import Video from "../assets/images/video.mp4";
 import { motion } from "framer-motion";
 
 export default function Perfume() {
-    const [backgroundColor, setBackgroundColor] = useState("orange");
-    const [backgroundColor2, setBackgroundColor2] = useState("#3f6da1");
+    const [backgroundColor, setBackgroundColor] = useState("#eb9d0e");
     const videoRef = useRef(null);
     const scrollTimeoutRef = useRef(null);
     const productsRef = useRef(null);
     const productsRef2 = useRef(null);
+    
+    
+
+     const getProductImage = (backgroundColor) => {
+       if (backgroundColor === "#eb9d0e") {
+         return Product1;
+       } else if (backgroundColor === "#3f6da1") {
+         return Product2;
+       } else {
+         return Product3;
+       }
+     };
   
 
     useEffect(() => {
@@ -44,29 +55,35 @@ export default function Perfume() {
             Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
           const visiblePercentage = (visibleHeight / elementHeight) * 100;
 
-          if (rect.top < 0 && visiblePercentage <= 40) {
+          if (rect.top < 0 && visiblePercentage <= 62) {
             setBackgroundColor("#3f6da1");
             console.log("Changing to blue");
-          } else {
-            setBackgroundColor("orange");
+          }
+          
+          else {
+            setBackgroundColor("#eb9d0e");
             console.log("Changing to orange"); 
           }
         }
 
-         if (productsRef2.current) {
-           const rect = productsRef2.current.getBoundingClientRect();
-           const visibleHeight =
-             Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
-           const visiblePercentage = (visibleHeight / rect.height) * 100;
+        //  if (productsRef2.current) {
+        //    const rect = productsRef2.current.getBoundingClientRect();
+        //    const visibleHeight =
+        //      Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+        //    const visiblePercentage = (visibleHeight / rect.height) * 100;
 
-           if (rect.top < 0 && visiblePercentage <= 40) {
-             setBackgroundColor2("#ce4444"); 
-             console.log("Changing Product 2 color to f4a261");
-           } else {
-             setBackgroundColor2("#3f6da1");
-             console.log("Changing Product 2 color to blue");
-           }
-         }
+        //    if (rect.top < 0 && visiblePercentage <= 62) {
+        //      setBackgroundColor2("#ce4444"); 
+        //      console.log("Changing Product 2 color to f4a261");
+        //    } 
+           
+        //    else {
+        //      setBackgroundColor2("#3f6da1");
+        //      console.log("Changing Product 2 color to blue");
+        //    }
+        //  }
+
+         
       };
 
       window.addEventListener("scroll", handleScroll);
@@ -130,7 +147,7 @@ export default function Perfume() {
         </motion.div>
       </StyledHero>
 
-      <StyledVideo>
+      {/* <StyledVideo>
         <video
           ref={videoRef}
           src={Video}
@@ -139,10 +156,10 @@ export default function Perfume() {
           muted
           loop
         />
-      </StyledVideo>
+      </StyledVideo> */}
 
-      <StyledProductsWrapper>
-        <StyledProducts ref={productsRef} $backgroundColor={backgroundColor}>
+      <StyledProductsWrapper $backgroundColor={backgroundColor}>
+        <StyledProducts ref={productsRef}>
           <div className="mareqee-background">
             <Marquee
               direction="left"
@@ -198,7 +215,7 @@ export default function Perfume() {
           </div>
         </StyledProducts>
 
-        <StyledProducts2 ref={productsRef2} $backgroundColor={backgroundColor2}>
+        <StyledProducts2 ref={productsRef2}>
           <div className="mareqee-background">
             <Marquee
               direction="left"
@@ -253,7 +270,7 @@ export default function Perfume() {
           </div>
         </StyledProducts2>
 
-        <StyledProducts3>
+        <StyledProducts3 >
           <div className="mareqee-background">
             <Marquee
               direction="left"
@@ -310,7 +327,11 @@ export default function Perfume() {
         </StyledProducts3>
 
         <StyledProdcutImage>
-          <img src={Product1} alt="" />
+          <img src={getProductImage(backgroundColor)} alt="Product" />
+        </StyledProdcutImage>
+
+        <StyledProdcutImage>
+          <img src={getProductImage(backgroundColor)} alt="Product" />
         </StyledProdcutImage>
       </StyledProductsWrapper>
 
@@ -350,7 +371,6 @@ export default function Perfume() {
 }
 
 const MainContainer = styled.div`
-  /* position: relative; */
   width: 100%;
   height: 100vh;
 `;
@@ -400,7 +420,7 @@ const StyledVideo = styled.div`
 const StyledProducts = styled.div`
   width: 100%;
   height: 130vh;
-  background-color: ${(props) => props.$backgroundColor};
+  
   position: relative;
   transition: background-color 1s ease;
   overflow: hidden;
@@ -482,7 +502,7 @@ const StyledProducts = styled.div`
 const StyledProducts2 = styled.div`
   width: 100%;
   height: 130vh;
-  background-color: ${(props) => props.$backgroundColor};
+  
   position: relative;
   transition: background-color 1s ease;
   overflow: hidden;
@@ -562,7 +582,7 @@ const StyledProducts2 = styled.div`
 const StyledProducts3 = styled.div`
   width: 100%;
   height: 130vh;
-  background-color: #ce4444;
+ 
   position: relative;
   transition: background-color 1s ease;
   overflow: hidden;
@@ -642,7 +662,9 @@ const StyledProducts3 = styled.div`
 
 const StyledProductsWrapper = styled.div`
   position: relative;
+  background-color: ${(props) => props.$backgroundColor};
   z-index: 1;
+  overflow: hidden;
 `;
 
 const StyledProdcutImage = styled.div`
