@@ -13,13 +13,14 @@ import { motion } from "framer-motion";
 
 export default function Perfume() {
     const [backgroundColor, setBackgroundColor] = useState("#eb9d0e");
+    const [isProductImageVisible, setIsProductImageVisible] = useState(false);
     const videoRef = useRef(null);
     const scrollTimeoutRef = useRef(null);
     const productsRef = useRef(null);
     const productsRef2 = useRef(null);
+    const productsWrapperRef = useRef(null); 
     
-    
-
+  
      const getProductImage = (backgroundColor) => {
        if (backgroundColor === "#eb9d0e") {
          return Product1;
@@ -29,6 +30,36 @@ export default function Perfume() {
          return Product3;
        }
      };
+
+
+     useEffect(() => {
+       
+       const observer = new IntersectionObserver(
+         (entries) => {
+           entries.forEach((entry) => {
+           
+             if (entry.isIntersecting) {
+               setIsProductImageVisible(true);
+             } else {
+               setIsProductImageVisible(false);
+             }
+           });
+         },
+         { threshold: 0.25 } 
+       );
+
+       if (productsWrapperRef.current) {
+         observer.observe(productsWrapperRef.current);
+       }
+
+      
+       return () => {
+         if (productsWrapperRef.current) {
+           observer.unobserve(productsWrapperRef.current);
+         }
+       };
+     }, []);
+
   
 
     useEffect(() => {
@@ -66,23 +97,21 @@ export default function Perfume() {
           }
         }
 
-        //  if (productsRef2.current) {
-        //    const rect = productsRef2.current.getBoundingClientRect();
-        //    const visibleHeight =
-        //      Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
-        //    const visiblePercentage = (visibleHeight / rect.height) * 100;
 
-        //    if (rect.top < 0 && visiblePercentage <= 62) {
-        //      setBackgroundColor2("#ce4444"); 
-        //      console.log("Changing Product 2 color to f4a261");
-        //    } 
-           
-        //    else {
-        //      setBackgroundColor2("#3f6da1");
-        //      console.log("Changing Product 2 color to blue");
-        //    }
-        //  }
+      if (productsRef2.current) {
+        const rect = productsRef2.current.getBoundingClientRect();
+        const elementHeight = rect.height;
+        const visibleHeight =
+          Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+        const visiblePercentage = (visibleHeight / elementHeight) * 100;
 
+      if (rect.top < 0 && visiblePercentage <= 62) {
+         setBackgroundColor("#ce4444");
+        console.log("Changing to red");
+      }
+    }
+
+  
          
       };
 
@@ -147,7 +176,7 @@ export default function Perfume() {
         </motion.div>
       </StyledHero>
 
-      {/* <StyledVideo>
+      <StyledVideo>
         <video
           ref={videoRef}
           src={Video}
@@ -156,9 +185,12 @@ export default function Perfume() {
           muted
           loop
         />
-      </StyledVideo> */}
+      </StyledVideo>
 
-      <StyledProductsWrapper $backgroundColor={backgroundColor}>
+      <StyledProductsWrapper
+        ref={productsWrapperRef}
+        $backgroundColor={backgroundColor}
+      >
         <StyledProducts ref={productsRef}>
           <div className="mareqee-background">
             <Marquee
@@ -270,7 +302,7 @@ export default function Perfume() {
           </div>
         </StyledProducts2>
 
-        <StyledProducts3 >
+        <StyledProducts3>
           <div className="mareqee-background">
             <Marquee
               direction="left"
@@ -326,11 +358,11 @@ export default function Perfume() {
           </div>
         </StyledProducts3>
 
-        <StyledProdcutImage>
-          <img src={getProductImage(backgroundColor)} alt="Product" />
-        </StyledProdcutImage>
-
-        <StyledProdcutImage>
+        <StyledProdcutImage
+          style={{
+            display: isProductImageVisible ? "block" : "none",
+          }}
+        >
           <img src={getProductImage(backgroundColor)} alt="Product" />
         </StyledProdcutImage>
       </StyledProductsWrapper>
@@ -493,8 +525,20 @@ const StyledProducts = styled.div`
   }
 
   @media (max-width: 640px) {
-    .product_image {
-      display: none;
+    .product_container{
+      .product_content{
+        flex-basis: 100%;
+        justify-content: center;
+        align-items: center;
+        padding-left: 0;
+        h1{
+          text-align: center;
+          font-size: 4rem;
+        }
+      }
+      .product_demo{
+        flex-basis: 100%;
+      }
     }
   }
 `;
@@ -502,7 +546,7 @@ const StyledProducts = styled.div`
 const StyledProducts2 = styled.div`
   width: 100%;
   height: 130vh;
-  
+
   position: relative;
   transition: background-color 1s ease;
   overflow: hidden;
@@ -573,8 +617,20 @@ const StyledProducts2 = styled.div`
   }
 
   @media (max-width: 640px) {
-    .product_image {
-      display: none;
+    .product_container {
+      .product_content {
+        flex-basis: 100%;
+        justify-content: center;
+        align-items: center;
+        padding-left: 0;
+        h1 {
+          text-align: center;
+          font-size: 4rem;
+        }
+      }
+      .product_demo {
+        flex-basis: 100%;
+      }
     }
   }
 `;
@@ -582,7 +638,7 @@ const StyledProducts2 = styled.div`
 const StyledProducts3 = styled.div`
   width: 100%;
   height: 130vh;
- 
+
   position: relative;
   transition: background-color 1s ease;
   overflow: hidden;
@@ -654,8 +710,20 @@ const StyledProducts3 = styled.div`
   }
 
   @media (max-width: 640px) {
-    .product_image {
-      display: none;
+    .product_container {
+      .product_content {
+        flex-basis: 100%;
+        justify-content: center;
+        align-items: center;
+        padding-left: 0;
+        h1 {
+          text-align: center;
+          font-size: 4rem;
+        }
+      }
+      .product_demo {
+        flex-basis: 100%;
+      }
     }
   }
 `;
@@ -665,23 +733,33 @@ const StyledProductsWrapper = styled.div`
   background-color: ${(props) => props.$backgroundColor};
   z-index: 1;
   overflow: hidden;
+
+  
 `;
 
 const StyledProdcutImage = styled.div`
   position: fixed;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 10; 
+  z-index: 10;
   width: auto;
   height: auto;
+  clip-path: inset(0 0 0 0);
 
   img {
     max-width: 100%;
     height: auto;
+    max-height: 80vh;
+    object-fit: contain;
+  }
+
+  @media (max-width: 640px) {
+    img {
+      width: 700px;
+    }
   }
 `;
-
 
 const StyledProdcut4 = styled.div`
   height: 100vh;
