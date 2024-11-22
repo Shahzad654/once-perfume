@@ -1,34 +1,7 @@
 :root{
   --section-margin: 200px;
-  h1{
-    font-family: PlayfairBold;
-    color: white;
-  }
-  h2{
-    font-family: PlayfairRegular;
-  }
-  h3{
-color: white;
-font-family: PlayfairRegular;
-  }
-  h4{
-color: white;
-font-family: PlayfairRegular;
-  }
-  h5{
-color: white;
-font-family: PlayfairRegular;
-  }
-  h6{
-    color: white;
-    font-family: PlayfairRegular;
-  }
-  p{
-    color: white;
-    font-family: PlayfairRegular;
-  }
+  
 }
-
 
 *{
   padding: 0;
