@@ -1,5 +1,5 @@
 :root{
-
+  --section-margin: 200px;
   h1{
     font-family: PlayfairBold;
     color: white;

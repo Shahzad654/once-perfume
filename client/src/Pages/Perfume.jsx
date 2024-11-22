@@ -9,14 +9,16 @@ import Product1 from "../assets/images/product1.webp";
 import Product2 from "../assets/images/product2.webp";
 import Product3 from "../assets/images/product3.webp";
 import Video from "../assets/images/video.mp4";
-
-
+import Video2 from "../assets/images/video2.mp4";
 import { motion } from "framer-motion";
+
+
 
 export default function Perfume() {
     const [backgroundColor, setBackgroundColor] = useState("#eb9d0e");
     const [isProductImageVisible, setIsProductImageVisible] = useState(false);
     const [videoHasEnded, setVideoHasEnded] = useState(false);
+    
     
     const videoRef = useRef(null);
     const scrollTimeoutRef = useRef(null);
@@ -46,6 +48,7 @@ export default function Perfume() {
        const observer = new IntersectionObserver(
          (entries) => {
            entries.forEach((entry) => {
+            console.log(entry.intersectionRatio);
            
              if (entry.isIntersecting) {
                setIsProductImageVisible(true);
@@ -96,7 +99,7 @@ export default function Perfume() {
             Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
           const visiblePercentage = (visibleHeight / elementHeight) * 100;
 
-          if (rect.top < 0 && visiblePercentage <= 62) {
+          if (rect.top < 0 && visiblePercentage <= 42) {
             setBackgroundColor("#3f6da1");
             console.log("Changing to blue");
           }
@@ -115,7 +118,7 @@ export default function Perfume() {
           Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
         const visiblePercentage = (visibleHeight / elementHeight) * 100;
 
-      if (rect.top < 0 && visiblePercentage <= 62) {
+      if (rect.top < 0 && visiblePercentage <= 42) {
          setBackgroundColor("#ce4444");
         console.log("Changing to red");
       }
@@ -163,25 +166,16 @@ export default function Perfume() {
           </Marquee>
         </div>
 
-        <motion.div
-          className="image-container"
-          initial={{
-            opacity: 0,
-            visibility: "hidden",
-            y: 500,
-          }}
-          animate={{
-            opacity: 1,
-            visibility: "visible",
-            y: 0,
-          }}
-          transition={{
-            duration: 2,
-            ease: "easeOut",
-          }}
-        >
-          <img src={HeroImg} alt="Perfume Hero" />
-        </motion.div>
+        <div className="image-container">
+          <motion.img
+            initial={{ opacity: 0, y: 400 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 50, damping: 25 }}
+            viewport={{ once: true }}
+            src={HeroImg}
+            alt="Perfume Hero"
+          />
+        </div>
       </StyledHero>
 
       <StyledVideo>
@@ -217,41 +211,65 @@ export default function Perfume() {
             </Marquee>
           </div>
 
+          {/* <div className="product_container"> */}
           <div className="product_container">
-            <div className="product_container">
-              <motion.div
-                className="product_content"
+            <motion.div
+              className="product_content"
+              // initial={{ opacity: 0, y: 50 }}
+              // whileInView={{ opacity: 1, y: -50 }}
+              // viewport={{ once: true, amount: 0.5 }}
+              // transition={{ duration: 1 }}
+            >
+              <motion.h1
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: -50 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 1 }}
               >
-                <h1>
-                  Le Male Elixir <span>le feu sacré à même la peau</span>{" "}
-                </h1>
-                <h5>parfum</h5>
-                <p>
-                  Le Male Elixir se pare d'une marinière striée d’or aux reflets
-                  transparents ambrés, révélant sa carrure saillante et sa peau
-                  cuivrée. Dans ce flacon de désir : un intense parfum ambré
-                  aromatique boisé. Sa fragrance embrase l'atmosphère, son jus
-                  réveille la peau, le Male Elixir enivre les sens, prêt à vous
-                  faire fondre.
-                </p>
-                <button>Shop</button>
-              </motion.div>
-
-              <motion.div
-                className="product_demo"
-                initial={{ opacity: 0, y: 150 }}
-                whileInView={{ opacity: 1, y: 50 }}
+                Le Male Elixir <span>le feu sacré à même la peau</span>{" "}
+              </motion.h1>
+              <motion.h5
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: -50 }}
                 viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 3 }}
+                transition={{ duration: 1 }}
               >
-                <img src={ProductDemo} alt="" />
-              </motion.div>
-            </div>
+                parfum
+              </motion.h5>
+              <motion.p
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: -50 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 1 }}
+              >
+                Le Male Elixir se pare d'une marinière striée d’or aux reflets
+                transparents ambrés, révélant sa carrure saillante et sa peau
+                cuivrée. Dans ce flacon de désir : un intense parfum ambré
+                aromatique boisé. Sa fragrance embrase l'atmosphère, son jus
+                réveille la peau, le Male Elixir enivre les sens, prêt à vous
+                faire fondre.
+              </motion.p>
+              <motion.button
+                initial={{ opacity: 0, y: 0 }}
+                whileInView={{ opacity: 1, y: -50 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 1 }}
+              >
+                Shop
+              </motion.button>
+            </motion.div>
+
+            <motion.div
+              className="product_demo"
+              initial={{ opacity: 0, y: 150 }}
+              whileInView={{ opacity: 1, y: 50 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 3 }}
+            >
+              <img src={ProductDemo} alt="" />
+            </motion.div>
           </div>
+          {/* </div> */}
         </StyledProducts>
 
         <StyledProducts2 ref={productsRef2}>
@@ -271,40 +289,64 @@ export default function Perfume() {
             </Marquee>
           </div>
 
+          {/* <div className="product_container"> */}
           <div className="product_container">
-            <div className="product_container">
-              <motion.div
-                className="product_demo"
-                initial={{ opacity: 0, y: 150 }}
-                whileInView={{ opacity: 1, y: 50 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 3 }}
-              >
-                <img src={ProductDemo2} alt="" />
-              </motion.div>
-              <motion.div
-                className="product_content"
+            <motion.div
+              className="product_demo"
+              initial={{ opacity: 0, y: 150 }}
+              whileInView={{ opacity: 1, y: 50 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 3 }}
+            >
+              <img src={ProductDemo2} alt="" />
+            </motion.div>
+            <motion.div
+              className="product_content"
+              // initial={{ opacity: 0, y: 50 }}
+              // whileInView={{ opacity: 1, y: -50 }}
+              // viewport={{ once: true, amount: 0.5 }}
+              // transition={{ duration: 1 }}
+            >
+              <motion.h1
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: -50 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 1 }}
               >
-                <h1>
-                  Le Male Elixir <span>le feu sacré à même la peau</span>{" "}
-                </h1>
-                <h5>parfum</h5>
-                <p>
-                  Le Male Elixir se pare d'une marinière striée d’or aux reflets
-                  transparents ambrés, révélant sa carrure saillante et sa peau
-                  cuivrée. Dans ce flacon de désir : un intense parfum ambré
-                  aromatique boisé. Sa fragrance embrase l'atmosphère, son jus
-                  réveille la peau, le Male Elixir enivre les sens, prêt à vous
-                  faire fondre.
-                </p>
-                <button>Shop</button>
-              </motion.div>
-            </div>
+                Le Male Elixir <span>le feu sacré à même la peau</span>{" "}
+              </motion.h1>
+              <motion.h5
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: -50 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 1 }}
+              >
+                parfum
+              </motion.h5>
+              <motion.p
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: -50 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 1 }}
+              >
+                Le Male Elixir se pare d'une marinière striée d’or aux reflets
+                transparents ambrés, révélant sa carrure saillante et sa peau
+                cuivrée. Dans ce flacon de désir : un intense parfum ambré
+                aromatique boisé. Sa fragrance embrase l'atmosphère, son jus
+                réveille la peau, le Male Elixir enivre les sens, prêt à vous
+                faire fondre.
+              </motion.p>
+              <motion.button
+                initial={{ opacity: 0, y: 70 }}
+                whileInView={{ opacity: 1, y: -50 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 1 }}
+              >
+                Shop
+              </motion.button>
+            </motion.div>
           </div>
+          {/* </div> */}
         </StyledProducts2>
 
         <StyledProducts3>
@@ -324,46 +366,72 @@ export default function Perfume() {
             </Marquee>
           </div>
 
+          {/* <div className="product_container"> */}
           <div className="product_container">
-            <div className="product_container">
-              <motion.div
-                className="product_content"
+            <motion.div
+              className="product_content"
+              // initial={{ opacity: 0, y: 50 }}
+              // whileInView={{ opacity: 1, y: -50 }}
+              // viewport={{ once: true, amount: 0.5 }}
+              // transition={{ duration: 1 }}
+            >
+              <motion.h1
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: -50 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 1 }}
               >
-                <h1>
-                  Le Male Elixir <span>le feu sacré à même la peau</span>{" "}
-                </h1>
-                <h5>parfum</h5>
-                <p>
-                  Le Male Elixir se pare d'une marinière striée d’or aux reflets
-                  transparents ambrés, révélant sa carrure saillante et sa peau
-                  cuivrée. Dans ce flacon de désir : un intense parfum ambré
-                  aromatique boisé. Sa fragrance embrase l'atmosphère, son jus
-                  réveille la peau, le Male Elixir enivre les sens, prêt à vous
-                  faire fondre.
-                </p>
-                <button>Shop</button>
-              </motion.div>
-
-              <motion.div
-                className="product_demo"
-                initial={{ opacity: 0, y: 150 }}
-                whileInView={{ opacity: 1, y: 50 }}
+                Le Male Elixir <span>le feu sacré à même la peau</span>{" "}
+              </motion.h1>
+              <motion.h5
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: -50 }}
                 viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 3 }}
+                transition={{ duration: 1 }}
               >
-                <img src={ProductDemo3} alt="" />
-              </motion.div>
-            </div>
+                parfum
+              </motion.h5>
+              <motion.p
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: -50 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 1 }}
+              >
+                Le Male Elixir se pare d'une marinière striée d’or aux reflets
+                transparents ambrés, révélant sa carrure saillante et sa peau
+                cuivrée. Dans ce flacon de désir : un intense parfum ambré
+                aromatique boisé. Sa fragrance embrase l'atmosphère, son jus
+                réveille la peau, le Male Elixir enivre les sens, prêt à vous
+                faire fondre.
+              </motion.p>
+              <motion.button
+                initial={{ opacity: 0, y: 70 }}
+                whileInView={{ opacity: 1, y: -50 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 1 }}
+              >
+                Shop
+              </motion.button>
+            </motion.div>
+
+            <motion.div
+              className="product_demo"
+              initial={{ opacity: 0, y: 150 }}
+              whileInView={{ opacity: 1, y: 50 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 3 }}
+            >
+              <img src={ProductDemo3} alt="" />
+            </motion.div>
           </div>
+          {/* </div> */}
         </StyledProducts3>
 
         <StyledProdcutImage
           style={{
-            display: isProductImageVisible ? "block" : "none",
+            opacity: isProductImageVisible ? 1 : 0,
+            visibility: isProductImageVisible ? "visible" : "hidden",
+            transition: "opacity 0.5s ease, visibility 0.5s ease",
           }}
         >
           <img src={getProductImage(backgroundColor)} alt="Product" />
@@ -372,10 +440,22 @@ export default function Perfume() {
 
       <StyledProdcut4>
         <div className="product4_container">
-          <h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: -10 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 1 }}
+          >
             Entrez dans la salle des machines et devenez membre de l'équipage
-          </h1>
-          <button>Shop</button>
+          </motion.h1>
+          <motion.button
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: -10 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 1 }}
+          >
+            Shop
+          </motion.button>
         </div>
       </StyledProdcut4>
 
@@ -400,20 +480,22 @@ export default function Perfume() {
         </div>
       </StyledProdcut5>
 
-      <StyledProdcut6></StyledProdcut6>
+      <StyledProdcut6>
+        <video src={Video2} autoPlay muted loop></video>
+      </StyledProdcut6>
     </MainContainer>
   );
 }
 
 const MainContainer = styled.div`
-  width: 100%;
-  height: 100vh;
+  /* width: 100%;
+  height: 100vh; */
 `;
 
 const StyledHero = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: #ce7f8c;
   overflow: hidden;
 
@@ -429,22 +511,18 @@ const StyledHero = styled.div`
 
   .image-container {
     position: absolute;
-    top: 20%;
+    /* top: 20%;
     left: 25%;
-    transform: translate(-50%, -50%);
-    z-index: 0;
+    transform: translate(-50%, -50%); */
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
   }
 
   img {
     width: 700px;
     height: auto;
-  }
-
-  @media (max-width: 640px) {
-    .image-container{
-        left: -30%;
-     
-    }
   }
 `;
 
@@ -455,12 +533,12 @@ const StyledVideo = styled.div`
 const StyledProducts = styled.div`
   height: 130vh;
   position: relative;
-
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  padding-top: var(--section-margin);
 
   .mareqee-background {
     position: absolute;
@@ -537,10 +615,10 @@ const StyledProducts = styled.div`
           text-align: center;
           font-size: 3rem;
         }
-        h5{
+        h5 {
           font-size: 1.5rem;
         }
-        p{
+        p {
           text-align: center;
         }
       }
@@ -553,25 +631,22 @@ const StyledProducts = styled.div`
   @media (min-width: 640px) and (max-width: 1024px) {
     .product_container {
       .product_content {
-       
         h1 {
           font-size: 4rem;
         }
       }
-     
     }
   }
 `;
 
 const StyledProducts2 = styled.div`
   height: 130vh;
-
   position: relative;
-
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: var(--section-margin);
 
   .mareqee-background {
     position: absolute;
@@ -601,13 +676,15 @@ const StyledProducts2 = styled.div`
       flex-shrink: 0;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-end;
+      padding-right: 10px;
       gap: 1rem;
       flex-direction: column;
 
       h1 {
         max-width: 15ch;
         font-size: 5rem;
+        text-align: right;
         span {
           color: transparent;
           -webkit-text-stroke: 1px white;
@@ -674,14 +751,14 @@ const StyledProducts2 = styled.div`
 `;
 
 const StyledProducts3 = styled.div`
- 
   height: 130vh;
-
   position: relative;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  padding-top: var(--section-margin);
 
   .mareqee-background {
     position: absolute;
@@ -803,12 +880,15 @@ const StyledProdcutImage = styled.div`
   img {
     max-width: 100%;
     height: auto;
-    max-height: 80vh;
     object-fit: contain;
+    margin-top: 70px;
   }
 
   @media (max-width: 640px) {
-    
+    img {
+      max-width: 500px;
+     
+    }
   }
 `;
 
@@ -876,8 +956,17 @@ const StyledProdcut5 = styled.div`
 `;
 
 const StyledProdcut6 = styled.div`
+  position: relative;
   height: 100vh;
-  background-image: url("/src/assets/images/prodcut6.jpg");
-  background-size: cover;
-  background-position: center;
+  overflow-x: hidden;
+
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+  }
 `;
+
