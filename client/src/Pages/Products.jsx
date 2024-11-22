@@ -1,105 +1,63 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import Marquee from "react-fast-marquee";
-import HeroImg from "../assets/images/banner-perfume.webp";
 import ProductDemo from "../assets/images/demo1.jpg";
 import ProductDemo2 from "../assets/images/demo2.jpg";
 import ProductDemo3 from "../assets/images/demo3.jpg";
 import Product1 from "../assets/images/product1.webp";
 import Product2 from "../assets/images/product2.webp";
 import Product3 from "../assets/images/product3.webp";
-import Video from "../assets/images/video.mp4";
-import Video2 from "../assets/images/video2.mp4";
 import { motion } from "framer-motion";
 
+export default function Products() {
 
-
-export default function Perfume() {
     const [backgroundColor, setBackgroundColor] = useState("#eb9d0e");
     const [isProductImageVisible, setIsProductImageVisible] = useState(false);
-    const [videoHasEnded, setVideoHasEnded] = useState(false);
-    
-    
-    const videoRef = useRef(null);
-    const scrollTimeoutRef = useRef(null);
+
     const productsRef = useRef(null);
     const productsRef2 = useRef(null);
-    const productsWrapperRef = useRef(null); 
-    
-  
-     const getProductImage = (backgroundColor) => {
-       if (backgroundColor === "#eb9d0e") {
-         return Product1;
-       } else if (backgroundColor === "#3f6da1") {
-         return Product2;
-       } else {
-         return Product3;
-       }
-     };
+    const productsWrapperRef = useRef(null);
 
-     
-     const handleVideoEnded = () => {
-       setVideoHasEnded(true);
-       console.log("Video has finished.");
-     };
+    const getProductImage = (backgroundColor) => {
+      if (backgroundColor === "#eb9d0e") {
+        return Product1;
+      } else if (backgroundColor === "#3f6da1") {
+        return Product2;
+      } else {
+        return Product3;
+      }
+    };
 
-
-     useEffect(() => {
-       if (videoRef.current) {
-         const videoHeight = videoRef.current.clientHeight; 
-         console.log("Video height:", videoHeight);
-       }
-     }, []);
-
-     useEffect(() => {
-       
-       const observer = new IntersectionObserver(
-         (entries) => {
-           entries.forEach((entry) => {
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
             console.log(entry.intersectionRatio);
-           
-             if (entry.isIntersecting) {
-               setIsProductImageVisible(true);
-             } else {
-               setIsProductImageVisible(false);
-             }
-           });
-         },
-         { threshold: 0.2 } 
-       );
 
-       if (productsWrapperRef.current) {
-         observer.observe(productsWrapperRef.current);
-       }
+            if (entry.isIntersecting) {
+              setIsProductImageVisible(true);
+            } else {
+              setIsProductImageVisible(false);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
 
-      
-       return () => {
-         if (productsWrapperRef.current) {
-           observer.unobserve(productsWrapperRef.current);
-         }
-       };
-     }, []);
+      if (productsWrapperRef.current) {
+        observer.observe(productsWrapperRef.current);
+      }
 
-
+      return () => {
+        if (productsWrapperRef.current) {
+          observer.unobserve(productsWrapperRef.current);
+        }
+      };
+    }, []);
 
     useEffect(() => {
       const handleScroll = () => {
-        if (videoRef.current) {
-          videoRef.current.play();
-          videoRef.current.playbackRate = 1.5;
-        }
 
-        if (scrollTimeoutRef.current) {
-          clearTimeout(scrollTimeoutRef.current);
-        }
-
-        scrollTimeoutRef.current = setTimeout(() => {
-          if (videoRef.current) {
-            videoRef.current.pause();
-          }
-        }, 200);
-
-       
         if (productsRef.current) {
           const rect = productsRef.current.getBoundingClientRect();
           const elementHeight = rect.height;
@@ -110,93 +68,35 @@ export default function Perfume() {
           if (rect.top < 0 && visiblePercentage <= 42) {
             setBackgroundColor("#3f6da1");
             console.log("Changing to blue");
-          }
-          
-          else {
+          } else {
             setBackgroundColor("#eb9d0e");
-            console.log("Changing to orange"); 
+            console.log("Changing to orange");
           }
         }
 
+        if (productsRef2.current) {
+          const rect = productsRef2.current.getBoundingClientRect();
+          const elementHeight = rect.height;
+          const visibleHeight =
+            Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+          const visiblePercentage = (visibleHeight / elementHeight) * 100;
 
-      if (productsRef2.current) {
-        const rect = productsRef2.current.getBoundingClientRect();
-        const elementHeight = rect.height;
-        const visibleHeight =
-          Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
-        const visiblePercentage = (visibleHeight / elementHeight) * 100;
-
-      if (rect.top < 0 && visiblePercentage <= 42) {
-         setBackgroundColor("#ce4444");
-        console.log("Changing to red");
-      }
-    }
-         
+          if (rect.top < 0 && visiblePercentage <= 42) {
+            setBackgroundColor("#ce4444");
+            console.log("Changing to red");
+          }
+        }
       };
 
       window.addEventListener("scroll", handleScroll);
 
       return () => {
         window.removeEventListener("scroll", handleScroll);
-        if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
       };
     }, []);
 
-
-
   return (
-    <MainContainer>
-      <StyledHero>
-        <div className="text-container">
-          <Marquee
-            direction="left"
-            speed={50}
-            style={{
-              fontSize: "8rem",
-              color: "white",
-            }}
-          >
-            Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
-            Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
-          </Marquee>
-          <Marquee
-            direction="right"
-            speed={50}
-            style={{
-              color: "transparent",
-              WebkitTextStroke: "0.8px white",
-              textFillColor: "transparent",
-              fontSize: "8rem",
-            }}
-          >
-            Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
-            Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
-          </Marquee>
-        </div>
-
-        <div className="image-container">
-          <motion.img
-            initial={{ opacity: 0, y: 400 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 50, damping: 25 }}
-            viewport={{ once: true }}
-            src={HeroImg}
-            alt="Perfume Hero"
-          />
-        </div>
-      </StyledHero>
-
-      <StyledVideo>
-        <video
-          ref={videoRef}
-          src={Video}
-          width='100%'
-          muted
-          onEnded={handleVideoEnded}
-          style={{ objectFit: "cover" }}
-        />
-      </StyledVideo>
-
+    <>
       <StyledProductsWrapper
         ref={productsWrapperRef}
         $backgroundColor={backgroundColor}
@@ -218,15 +118,8 @@ export default function Perfume() {
             </Marquee>
           </div>
 
-          {/* <div className="product_container"> */}
           <div className="product_container">
-            <motion.div
-              className="product_content"
-              // initial={{ opacity: 0, y: 50 }}
-              // whileInView={{ opacity: 1, y: -50 }}
-              // viewport={{ once: true, amount: 0.5 }}
-              // transition={{ duration: 1 }}
-            >
+            <div className="product_content">
               <motion.h1
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: -50 }}
@@ -256,15 +149,20 @@ export default function Perfume() {
                 réveille la peau, le Male Elixir enivre les sens, prêt à vous
                 faire fondre.
               </motion.p>
+
               <motion.button
                 initial={{ opacity: 0, y: 0 }}
-                whileInView={{ opacity: 1, y: -50 }}
+                whileInView={{ opacity: 1, y: -30 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 1 }}
+                onClick={() =>
+                  (window.location.href =
+                    "https://www.onceperfume.com/p/explosea/")
+                }
               >
                 Shop
               </motion.button>
-            </motion.div>
+            </div>
 
             <motion.div
               className="product_demo"
@@ -276,7 +174,6 @@ export default function Perfume() {
               <img src={ProductDemo} alt="" />
             </motion.div>
           </div>
-          {/* </div> */}
         </StyledProducts>
 
         <StyledProducts2 ref={productsRef2}>
@@ -296,7 +193,6 @@ export default function Perfume() {
             </Marquee>
           </div>
 
-          {/* <div className="product_container"> */}
           <div className="product_container">
             <motion.div
               className="product_demo"
@@ -307,13 +203,7 @@ export default function Perfume() {
             >
               <img src={ProductDemo2} alt="" />
             </motion.div>
-            <motion.div
-              className="product_content"
-              // initial={{ opacity: 0, y: 50 }}
-              // whileInView={{ opacity: 1, y: -50 }}
-              // viewport={{ once: true, amount: 0.5 }}
-              // transition={{ duration: 1 }}
-            >
+            <div className="product_content">
               <motion.h1
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: -50 }}
@@ -345,15 +235,18 @@ export default function Perfume() {
               </motion.p>
               <motion.button
                 initial={{ opacity: 0, y: 70 }}
-                whileInView={{ opacity: 1, y: -50 }}
+                whileInView={{ opacity: 1, y: -30 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 1 }}
+                onClick={() =>
+                  (window.location.href =
+                    "https://www.onceperfume.com/p/hotis/")
+                }
               >
                 Shop
               </motion.button>
-            </motion.div>
+            </div>
           </div>
-          {/* </div> */}
         </StyledProducts2>
 
         <StyledProducts3>
@@ -373,15 +266,8 @@ export default function Perfume() {
             </Marquee>
           </div>
 
-          {/* <div className="product_container"> */}
           <div className="product_container">
-            <motion.div
-              className="product_content"
-              // initial={{ opacity: 0, y: 50 }}
-              // whileInView={{ opacity: 1, y: -50 }}
-              // viewport={{ once: true, amount: 0.5 }}
-              // transition={{ duration: 1 }}
-            >
+            <div className="product_content">
               <motion.h1
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: -50 }}
@@ -413,13 +299,17 @@ export default function Perfume() {
               </motion.p>
               <motion.button
                 initial={{ opacity: 0, y: 70 }}
-                whileInView={{ opacity: 1, y: -50 }}
+                whileInView={{ opacity: 1, y: -30 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 1 }}
+                onClick={() =>
+                  (window.location.href =
+                    "https://www.onceperfume.com/p/lorev/")
+                }
               >
                 Shop
               </motion.button>
-            </motion.div>
+            </div>
 
             <motion.div
               className="product_demo"
@@ -431,7 +321,6 @@ export default function Perfume() {
               <img src={ProductDemo3} alt="" />
             </motion.div>
           </div>
-          {/* </div> */}
         </StyledProducts3>
 
         <StyledProdcutImage
@@ -444,95 +333,9 @@ export default function Perfume() {
           <img src={getProductImage(backgroundColor)} alt="Product" />
         </StyledProdcutImage>
       </StyledProductsWrapper>
-
-      <StyledProdcut4>
-        <div className="product4_container">
-          <motion.h1
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: -10 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 1 }}
-          >
-            Entrez dans la salle des machines et devenez membre de l'équipage
-          </motion.h1>
-          <motion.button
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: -10 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 1 }}
-          >
-            Shop
-          </motion.button>
-        </div>
-      </StyledProdcut4>
-
-      <StyledProdcut5>
-        <div className="product5_container">
-          <div className="mareqee-background">
-            <Marquee
-              direction="left"
-              speed={50}
-              style={{
-                color: "transparent",
-                WebkitTextStroke: "2px white",
-                textFillColor: "transparent",
-                fontSize: "18rem",
-              }}
-            >
-              Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
-              Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
-            </Marquee>
-          </div>
-          <button>Shop</button>
-        </div>
-      </StyledProdcut5>
-
-      <StyledProdcut6>
-        <video src={Video2} autoPlay muted loop></video>
-      </StyledProdcut6>
-    </MainContainer>
+    </>
   );
 }
-
-const MainContainer = styled.div`
-  /* width: 100%;
-  height: 100vh; */
-`;
-
-const StyledHero = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background-color: #ce7f8c;
-  overflow: hidden;
-
-  .text-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    text-align: center;
-    z-index: 0;
-  }
-
-  .image-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-  }
-
-  img {
-    width: 700px;
-    height: auto;
-  }
-`;
-
-const StyledVideo = styled.div`
-  height: 130vh;
-`;
 
 const StyledProducts = styled.div`
   height: 130vh;
@@ -891,86 +694,6 @@ const StyledProdcutImage = styled.div`
   @media (max-width: 640px) {
     img {
       max-width: 500px;
-     
     }
   }
 `;
-
-const StyledProdcut4 = styled.div`
-  height: 100vh;
-  background-image: url("/src/assets/images/product4.jpg");
-  background-size: cover;
-  background-position: center;
-
-  .product4_container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 2rem;
-    padding-left: 20px;
-    h1 {
-      font-size: 5rem;
-      max-width: 15ch;
-    }
-   
-  }
-
-  @media (max-width: 640px) {
-      .product4_container {
-    h1{
-      font-size: 3rem;
-      margin-top: 2rem;
-    }
-  }
-}
-
-  @media (min-width: 640px) and (max-width: 1024px) {
-      .product4_container {
-    h1{
-      font-size: 4rem;
-      margin-top: 1rem;
-    }
-  }
-}
-`;
-
-const StyledProdcut5 = styled.div`
-  height: 100vh;
-  background-image: url("/src/assets/images/prodcut5.jpg");
-  background-size: cover;
-  background-position: center;
-  overflow-x: hidden;
-
-  .product5_container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    gap: 2rem;
-    /* padding-left: 20px; */
-    h1 {
-      color: white;
-      font-size: 5rem;
-      max-width: 15ch;
-      text-align: center;
-    }
-   
-  }
-`;
-
-const StyledProdcut6 = styled.div`
-  position: relative;
-  height: 100vh;
-  overflow-x: hidden;
-
-  video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-  }
-`;
-
