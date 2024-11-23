@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
+import { throttle } from "lodash";
 import Video from "../assets/images/video.mp4";
 
 export default function ScrollVideo() {
@@ -51,53 +52,62 @@ export default function ScrollVideo() {
   }, [videoHasEnded]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (!videoRef.current) return;
+    let scrollRequestId;
 
-      const video = videoRef.current;
-      const container = containerRef.current;
-
-      if (container && isSticky && !videoHasEnded) {
-        const scrollTop = window.scrollY - container.offsetTop;
-        const scrollHeight = container.offsetHeight - window.innerHeight;
-
-       
-        let progress = Math.max(0, Math.min(1, scrollTop / scrollHeight));
-
-        if (window.scrollY < container.offsetTop) {
-          progress =
-            1 -
-            Math.max(
-              0,
-              Math.min(1, (container.offsetTop - window.scrollY) / scrollHeight)
-            );
-        }
-
-       
-        if (progress !== video.currentTime / video.duration) {
-          video.currentTime = progress * video.duration;
-        }
-
-      
-        if (progress > 0 && !video.paused) {
-          video.play();
-          video.playbackRate = 1;
-        }
-
-        if (scrollTimeoutRef.current) {
-          clearTimeout(scrollTimeoutRef.current);
-        }
-
-       
-        scrollTimeoutRef.current = setTimeout(() => {
-          if (video && !videoHasEnded) {
-            video.pause();
-          }
-        }, 200); 
+    const handleScroll = throttle(() => {
+      if (scrollRequestId) {
+        cancelAnimationFrame(scrollRequestId);
       }
-    };
+
+      scrollRequestId = requestAnimationFrame(() => {
+        if (!videoRef.current) return;
+
+        const video = videoRef.current;
+        const container = containerRef.current;
+
+        if (container && isSticky && !videoHasEnded) {
+          const scrollTop = window.scrollY - container.offsetTop;
+          const scrollHeight = container.offsetHeight - window.innerHeight;
+
+          let progress = Math.max(0, Math.min(1, scrollTop / scrollHeight));
+
+          if (window.scrollY < container.offsetTop) {
+            progress =
+              1 -
+              Math.max(
+                0,
+                Math.min(
+                  1,
+                  (container.offsetTop - window.scrollY) / scrollHeight
+                )
+              );
+          }
+
+          if (progress !== video.currentTime / video.duration) {
+            video.currentTime = progress * video.duration;
+          }
+
+          if (progress > 0 && !video.paused) {
+            video.play();
+            video.playbackRate = 0.5;
+          }
+
+          if (scrollTimeoutRef.current) {
+            clearTimeout(scrollTimeoutRef.current);
+          }
+
+          scrollTimeoutRef.current = setTimeout(() => {
+            if (video && !videoHasEnded) {
+              video.pause();
+            }
+          }, 50);
+        }
+      });
+    }, 30);
+    
 
     window.addEventListener("scroll", handleScroll);
+
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
