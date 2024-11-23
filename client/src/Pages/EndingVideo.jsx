@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import Video2 from "../assets/images/video2.mp4";
+import Video2 from "../assets/images/video2.webm";
 
 
 export default function EndingVideo() {
