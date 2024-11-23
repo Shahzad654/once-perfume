@@ -9,19 +9,21 @@ export default function ScrollVideo() {
   const [containerHeight, setContainerHeight] = useState("100vh");
   const videoRef = useRef(null);
   const containerRef = useRef(null);
-  const scrollTimeoutRef = useRef(null);
 
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
-      video.addEventListener("loadedmetadata", () => {
+      const handleMetadata = () => {
         const scrollDuration = video.duration / 2;
         const scrollHeight = window.innerHeight * (scrollDuration / 2);
         if (containerRef.current) {
           containerRef.current.style.height = `${scrollHeight}px`;
           setContainerHeight(`${scrollHeight}px`);
         }
-      });
+      };
+
+      video.addEventListener("loadedmetadata", handleMetadata);
+      return () => video.removeEventListener("loadedmetadata", handleMetadata);
     }
   }, []);
 
@@ -52,66 +54,37 @@ export default function ScrollVideo() {
   }, [videoHasEnded]);
 
   useEffect(() => {
-    let scrollRequestId;
-
     const handleScroll = throttle(() => {
-      if (scrollRequestId) {
-        cancelAnimationFrame(scrollRequestId);
-      }
+      if (!videoRef.current || videoHasEnded) return;
 
-      scrollRequestId = requestAnimationFrame(() => {
-        if (!videoRef.current) return;
+      const video = videoRef.current;
+      const container = containerRef.current;
 
-        const video = videoRef.current;
-        const container = containerRef.current;
+      if (container && isSticky) {
+        const scrollTop = window.scrollY - container.offsetTop;
+        const scrollHeight = container.offsetHeight - window.innerHeight;
+        let progress = Math.max(0, Math.min(1, scrollTop / scrollHeight));
 
-        if (container && isSticky && !videoHasEnded) {
-          const scrollTop = window.scrollY - container.offsetTop;
-          const scrollHeight = container.offsetHeight - window.innerHeight;
-
-          let progress = Math.max(0, Math.min(1, scrollTop / scrollHeight));
-
-          if (window.scrollY < container.offsetTop) {
-            progress =
-              1 -
-              Math.max(
-                0,
-                Math.min(
-                  1,
-                  (container.offsetTop - window.scrollY) / scrollHeight
-                )
-              );
-          }
-
-          if (progress !== video.currentTime / video.duration) {
-            video.currentTime = progress * video.duration;
-          }
-
-          if (progress > 0 && !video.paused) {
-            video.play();
-            video.playbackRate = 0.5;
-          }
-
-          if (scrollTimeoutRef.current) {
-            clearTimeout(scrollTimeoutRef.current);
-          }
-
-          scrollTimeoutRef.current = setTimeout(() => {
-            if (video && !videoHasEnded) {
-              video.pause();
-            }
-          }, 50);
+        if (window.scrollY < container.offsetTop) {
+          progress = 1 - Math.max( 0,Math.min(1, (container.offsetTop - window.scrollY) / scrollHeight));
         }
-      });
-    }, 30);
-    
+
+        //video completion time calcualtion
+       if (Math.abs(progress - video.currentTime / video.duration) > 0.05) {
+         video.currentTime = progress * video.duration;
+       }
+
+
+        if (progress === 0 && !video.paused) {
+          video.pause();
+        }
+      }
+    }, 100);
 
     window.addEventListener("scroll", handleScroll);
 
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     };
   }, [isSticky, videoHasEnded]);
 
@@ -125,9 +98,10 @@ export default function ScrollVideo() {
         <video
           ref={videoRef}
           src={Video}
-          type='webm'
+          type="webm"
           muted
           playsInline
+          preload="auto"
           onEnded={handleVideoEnded}
           style={{
             objectFit: "cover",
@@ -155,7 +129,6 @@ const VideoWrapper = styled.div`
 
   video {
     width: 100%;
-    height: 100%;
     object-fit: cover;
   }
 `;
