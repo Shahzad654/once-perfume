@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
-import { throttle } from "lodash";
 import Video from "../assets/videos/bridge.mp4";
+import Video2 from '../assets/videos/video.mp4'
 
 export default function ScrollVideo() {
   const [videoHasEnded, setVideoHasEnded] = useState(false);
@@ -58,7 +58,7 @@ export default function ScrollVideo() {
   };
 
   useEffect(() => {
-    const handleIntersection = throttle(() => {
+    const handleIntersection = () => {
       const container = containerRef.current;
       if (container) {
         const rect = container.getBoundingClientRect();
@@ -66,7 +66,7 @@ export default function ScrollVideo() {
           rect.top < window.innerHeight && rect.bottom > 0 && !videoHasEnded
         );
       }
-    }, 100);
+    }
 
     window.addEventListener("scroll", handleIntersection);
     return () => window.removeEventListener("scroll", handleIntersection);
@@ -132,12 +132,10 @@ export default function ScrollVideo() {
         hasEnded={videoHasEnded}
         containerHeight={containerHeight}
       >
-       
         <video
           ref={videoRef}
-          // src={Video}
-          // src="https://scrollyvideo.js.org/goldengate.mp4"
-          src="https://firebasestorage.googleapis.com/v0/b/hs-mowers-cb290.appspot.com/o/assets%2Fonce%20perfume%2Fvideo.mp4?alt=media&token=ba0f5d3c-4f86-4e67-a8d7-86445732104e"
+          src={Video2}
+          // src="https://video.zoyero.com/Lorev_EDIT_4.mp4"
           muted
           playsInline
           preload="auto"

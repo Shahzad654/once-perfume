@@ -32,7 +32,6 @@ export default function Products() {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            console.log(entry.intersectionRatio);
 
             if (entry.isIntersecting) {
               setIsProductImageVisible(true);
@@ -67,10 +66,10 @@ export default function Products() {
 
           if (rect.top < 0 && visiblePercentage <= 42) {
             setBackgroundColor("#3f6da1");
-            console.log("Changing to blue");
+           
           } else {
             setBackgroundColor("#eb9d0e");
-            console.log("Changing to orange");
+            
           }
         }
 
@@ -83,7 +82,7 @@ export default function Products() {
 
           if (rect.top < 0 && visiblePercentage <= 42) {
             setBackgroundColor("#ce4444");
-            console.log("Changing to red");
+            
           }
         }
       };

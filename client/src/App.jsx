@@ -7,6 +7,7 @@ import Products from './Pages/Products'
 import EndingVideo from './Pages/EndingVideo'
 import SecondProduct from './Pages/SecondProduct'
 import ThirdProduct from './Pages/ThirdProduct'
+import VideoScroll from './Pages/VideoScroll'
 
 function App() {
  
@@ -16,6 +17,7 @@ function App() {
      {/* <Perfume/> */}
      <Home/>
      <ScrollVideo/>
+     {/* <VideoScroll/> */}
      <Products/>
      <SecondProduct/>
      <ThirdProduct/>

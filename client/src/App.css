@@ -3,6 +3,12 @@
   
 }
 
+
+@font-face {
+  font-family: regular;
+  src: url(./assets/fonts/Gotham-Black.woff2);
+}
+
 *{
   padding: 0;
   margin: 0;
@@ -10,6 +16,7 @@
 
 h1,h2,h3,h4,h5,h6,p{
   color:white;
+  font-family: regular;
 }
 
 
@@ -20,6 +27,7 @@ button {
   border-style: none;
   font-size: 1rem;
   font-weight: bold;
+  font-family: regular;
   cursor: pointer;
   &:hover{
     color: white;
