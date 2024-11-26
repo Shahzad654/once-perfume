@@ -1,14 +1,39 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import { throttle } from "lodash";
-import Video from "../assets/images/video.mp4";
+import Video from "../assets/videos/bridge.mp4";
 
 export default function ScrollVideo() {
   const [videoHasEnded, setVideoHasEnded] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [containerHeight, setContainerHeight] = useState("100vh");
+  const [isLoaded, setIsLoaded] = useState(false); 
   const videoRef = useRef(null);
   const containerRef = useRef(null);
+
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+     
+      video.load();
+
+     
+      const preloadVideo = async () => {
+        try {
+          
+          await video.play();
+          video.pause();
+          video.currentTime = 0;
+          setIsLoaded(true);
+        } catch (error) {
+          console.error("Video preload failed:", error);
+        }
+      };
+
+      preloadVideo();
+    }
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -30,63 +55,75 @@ export default function ScrollVideo() {
   const handleVideoEnded = () => {
     setVideoHasEnded(true);
     setIsSticky(false);
-    console.log("Video has finished.");
   };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (!videoHasEnded) {
-          setIsSticky(entry.isIntersecting);
-        }
-      },
-      {
-        threshold: 0.1,
+    const handleIntersection = throttle(() => {
+      const container = containerRef.current;
+      if (container) {
+        const rect = container.getBoundingClientRect();
+        setIsSticky(
+          rect.top < window.innerHeight && rect.bottom > 0 && !videoHasEnded
+        );
       }
-    );
+    }, 100);
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => observer.disconnect();
+    window.addEventListener("scroll", handleIntersection);
+    return () => window.removeEventListener("scroll", handleIntersection);
   }, [videoHasEnded]);
 
   useEffect(() => {
-    const handleScroll = throttle(() => {
-      if (!videoRef.current || videoHasEnded) return;
+    let lastScrollTime = 0;
+    let animationFrameId = null;
+
+    const handleScroll = () => {
+      if (!videoRef.current || videoHasEnded || !isLoaded) return;
 
       const video = videoRef.current;
       const container = containerRef.current;
 
       if (container && isSticky) {
-        const scrollTop = window.scrollY - container.offsetTop;
-        const scrollHeight = container.offsetHeight - window.innerHeight;
-        let progress = Math.max(0, Math.min(1, scrollTop / scrollHeight));
+        const now = performance.now();
+        if (now - lastScrollTime > 16) {
+          lastScrollTime = now;
 
-        if (window.scrollY < container.offsetTop) {
-          progress = 1 - Math.max( 0,Math.min(1, (container.offsetTop - window.scrollY) / scrollHeight));
-        }
+          const scrollTop = window.scrollY - container.offsetTop;
+          const scrollHeight = container.offsetHeight - window.innerHeight;
+          const progress = Math.max(0, Math.min(1, scrollTop / scrollHeight));
 
-        //video completion time calcualtion
-       if (Math.abs(progress - video.currentTime / video.duration) > 0.05) {
-         video.currentTime = progress * video.duration;
-       }
+          if (Math.abs(progress - video.currentTime / video.duration) > 0.01) {
+            const targetTime = progress * video.duration;
 
+            const smoothTime =
+              video.currentTime + (targetTime - video.currentTime) * 0.5;
+            video.currentTime = smoothTime;
 
-        if (progress === 0 && !video.paused) {
-          video.pause();
+            if (video.buffered.length) {
+              const nextSecond = Math.min(smoothTime + 1, video.duration);
+              if (video.buffered.end(0) < nextSecond) {
+                video.currentTime = video.buffered.end(0);
+              }
+            }
+          }
         }
       }
-    }, 100);
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
     };
-  }, [isSticky, videoHasEnded]);
+
+    const onScroll = () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+      animationFrameId = requestAnimationFrame(handleScroll);
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [isSticky, videoHasEnded, isLoaded]);
 
   return (
     <Container ref={containerRef}>
@@ -95,10 +132,12 @@ export default function ScrollVideo() {
         hasEnded={videoHasEnded}
         containerHeight={containerHeight}
       >
+       
         <video
           ref={videoRef}
-          src={Video}
-          type="webm"
+          // src={Video}
+          // src="https://scrollyvideo.js.org/goldengate.mp4"
+          src="https://firebasestorage.googleapis.com/v0/b/hs-mowers-cb290.appspot.com/o/assets%2Fonce%20perfume%2Fvideo.mp4?alt=media&token=ba0f5d3c-4f86-4e67-a8d7-86445732104e"
           muted
           playsInline
           preload="auto"
@@ -107,6 +146,7 @@ export default function ScrollVideo() {
             objectFit: "cover",
             width: "100%",
             height: "100%",
+            visibility: isLoaded ? "visible" : "hidden",
           }}
         />
       </VideoWrapper>
@@ -126,9 +166,6 @@ const VideoWrapper = styled.div`
   top: ${(props) => (props.isSticky && !props.hasEnded ? "0" : "auto")};
   left: 0;
   z-index: 10;
-
-  video {
-    width: 100%;
-    object-fit: cover;
-  }
 `;
+
+
