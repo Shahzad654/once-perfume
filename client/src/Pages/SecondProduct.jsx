@@ -15,7 +15,8 @@ export default function SecondProduct() {
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 1 }}
           >
-            Entrez dans la salle des machines et devenez membre de l'équipage
+            Un profumo che racconta della mente, che agisce e non dimentica, e
+            della memoria, la facoltà pura di mantenere vivi i ricordi.
           </motion.h1>
           <motion.button
             initial={{ opacity: 0, y: 60 }}
@@ -40,21 +41,21 @@ const StyledProduct = styled.div`
 
   .product4_container {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
     gap: 2rem;
-    padding-left: 20px;
+    /* padding-left: 20px; */
     h1 {
-      font-size: 5rem;
-      max-width: 15ch;
+      font-size: 4rem;
+      max-width: 20ch;
+      margin-top: 4rem;
     }
   }
 
   @media (max-width: 640px) {
     .product4_container {
       h1 {
-        font-size: 3rem;
+        font-size: 2rem;
         margin-top: 2rem;
       }
     }
@@ -63,7 +64,7 @@ const StyledProduct = styled.div`
   @media (min-width: 640px) and (max-width: 1024px) {
     .product4_container {
       h1 {
-        font-size: 4rem;
+        font-size: 2rem;
         margin-top: 1rem;
       }
     }

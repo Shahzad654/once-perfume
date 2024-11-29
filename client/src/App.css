@@ -9,16 +9,25 @@
   src: url(./assets/fonts/Gotham-Black.woff2);
 }
 
+@font-face {
+  font-family: regularbook;
+  src: url(./assets/fonts/Gotham-Book.woff2);
+}
+
 *{
   padding: 0;
   margin: 0;
 }
 
-h1,h2,h3,h4,h5,h6,p{
+h1,h2,h3,h4,h5,h6{
   color:white;
   font-family: regular;
 }
 
+p{
+  color: white;
+  font-family: regularbook;
+}
 
 button {
   color: black;
@@ -33,4 +42,12 @@ button {
     color: white;
     background-color: black;
   }
+}
+
+
+a{
+  text-decoration: none;
+  color: black;
+  font-family: regularbook;
+  font-size: 0.8rem;
 }

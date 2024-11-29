@@ -36,13 +36,19 @@ const StyledProdcut = styled.div`
   background-size: cover;
   background-position: center;
   overflow-x: hidden;
+  position: relative;
 
   .product5_container {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 2rem;
+    text-align: center;
     h1 {
       color: white;
       font-size: 5rem;

@@ -110,6 +110,7 @@ export default function Products() {
                 WebkitTextStroke: "2px white",
                 textFillColor: "transparent",
                 fontSize: "18rem",
+                opacity: "0.4",
               }}
             >
               Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
@@ -125,28 +126,27 @@ export default function Products() {
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 1 }}
               >
-                Le Male Elixir <span>le feu sacré à même la peau</span>{" "}
+                EXPLOSEA
               </motion.h1>
-              <motion.h5
+              <motion.h2
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: -50 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 1 }}
               >
-                parfum
-              </motion.h5>
+                L’ESPLORAZIONE E LA LIBERTÀ
+              </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: -50 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 1 }}
               >
-                Le Male Elixir se pare d'une marinière striée d’or aux reflets
-                transparents ambrés, révélant sa carrure saillante et sa peau
-                cuivrée. Dans ce flacon de désir : un intense parfum ambré
-                aromatique boisé. Sa fragrance embrase l'atmosphère, son jus
-                réveille la peau, le Male Elixir enivre les sens, prêt à vous
-                faire fondre.
+                In Explosea, le note marine di testa si intrecciano con gli
+                agrumi e lo zafferano, aprendo la strada a un cuore ricco di
+                rosa e liquirizia, avvolgente cashmere, ambra e cypriol. Mentre
+                un fondo di rinnovata ambra, unita a musk e legno di sandalo,
+                dona alla composizione struttura e persistenza profonda.
               </motion.p>
 
               <motion.button
@@ -185,6 +185,7 @@ export default function Products() {
                 WebkitTextStroke: "2px white",
                 textFillColor: "transparent",
                 fontSize: "18rem",
+                opacity: "0.4",
               }}
             >
               Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
@@ -209,28 +210,28 @@ export default function Products() {
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 1 }}
               >
-                Le Male Elixir <span>le feu sacré à même la peau</span>{" "}
+                HOTIS
               </motion.h1>
-              <motion.h5
+              <motion.h2
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: -50 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 1 }}
               >
-                parfum
-              </motion.h5>
+                L’OLFATTO E LA SORPRESA
+              </motion.h2>
+
               <motion.p
                 initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: -50 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 1 }}
               >
-                Le Male Elixir se pare d'une marinière striée d’or aux reflets
-                transparents ambrés, révélant sa carrure saillante et sa peau
-                cuivrée. Dans ce flacon de désir : un intense parfum ambré
-                aromatique boisé. Sa fragrance embrase l'atmosphère, son jus
-                réveille la peau, le Male Elixir enivre les sens, prêt à vous
-                faire fondre.
+                In Hotis, le note di testa fresche dell’erba mate e delle bacche
+                di ginepro incontrano il brio del pepe rosa, esaltando un cuore
+                alla rosa, tè, cannella, neroli e chiodi di garofano. Mentre il
+                fondo legnoso e ambrato rende questa fragranza accogliente e
+                intensa.
               </motion.p>
               <motion.button
                 initial={{ opacity: 0, y: 70 }}
@@ -258,6 +259,7 @@ export default function Products() {
                 WebkitTextStroke: "2px white",
                 textFillColor: "transparent",
                 fontSize: "18rem",
+                opacity: "0.4",
               }}
             >
               Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
@@ -273,28 +275,29 @@ export default function Products() {
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 1 }}
               >
-                Le Male Elixir <span>le feu sacré à même la peau</span>{" "}
+                LOREV
               </motion.h1>
-              <motion.h5
+
+              <motion.h2
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: -50 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 1 }}
               >
-                parfum
-              </motion.h5>
+                L’AMORE E LA ROSA
+              </motion.h2>
+
               <motion.p
                 initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: -50 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 1 }}
               >
-                Le Male Elixir se pare d'une marinière striée d’or aux reflets
-                transparents ambrés, révélant sa carrure saillante et sa peau
-                cuivrée. Dans ce flacon de désir : un intense parfum ambré
-                aromatique boisé. Sa fragrance embrase l'atmosphère, son jus
-                réveille la peau, le Male Elixir enivre les sens, prêt à vous
-                faire fondre.
+                In Lorev, le note di testa floreali si uniscono alla pesca dolce
+                e a un brioso pepe rosa, per esaltare un cuore alla tuberosa e
+                al gelsomino sambac. Mentre il fondo intenso di patchouli e
+                vetiver dona carattere e persistenza a una fragranza
+                sorprendente.
               </motion.p>
               <motion.button
                 initial={{ opacity: 0, y: 70 }}
@@ -337,7 +340,7 @@ export default function Products() {
 }
 
 const StyledProducts = styled.div`
-  height: 130vh;
+  height: 100vh;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -377,7 +380,7 @@ const StyledProducts = styled.div`
       align-items: flex-start;
       gap: 1rem;
       flex-direction: column;
-      padding-left: 10px;
+      padding-left: 5%;
 
       h1 {
         max-width: 15ch;
@@ -388,11 +391,8 @@ const StyledProducts = styled.div`
           text-fill-color: transparent;
         }
       }
-      h5 {
-        font-weight: bold;
-        font-size: 2rem;
-      }
-
+      
+     
       p {
         font-size: 1rem;
         max-width: 38ch;
@@ -446,7 +446,7 @@ const StyledProducts = styled.div`
 `;
 
 const StyledProducts2 = styled.div`
-  height: 130vh;
+  height: 100vh;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -483,7 +483,7 @@ const StyledProducts2 = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      padding-right: 10px;
+      padding-right: 5%;
       gap: 1rem;
       flex-direction: column;
 
@@ -497,10 +497,7 @@ const StyledProducts2 = styled.div`
           text-fill-color: transparent;
         }
       }
-      h5 {
-        font-weight: bold;
-        font-size: 2rem;
-      }
+      
 
       p {
         font-size: 1rem;
@@ -532,9 +529,7 @@ const StyledProducts2 = styled.div`
           text-align: center;
           font-size: 3rem;
         }
-        h5 {
-          font-size: 1.5rem;
-        }
+        
         p {
           text-align: center;
         }
@@ -557,7 +552,7 @@ const StyledProducts2 = styled.div`
 `;
 
 const StyledProducts3 = styled.div`
-  height: 130vh;
+  height: max-content;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -597,7 +592,7 @@ const StyledProducts3 = styled.div`
       align-items: flex-start;
       gap: 1rem;
       flex-direction: column;
-      padding-left: 10px;
+      padding-left: 5%;
 
       h1 {
         max-width: 15ch;

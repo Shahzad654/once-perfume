@@ -1,27 +1,23 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import Video from "../assets/videos/bridge.mp4";
-import Video2 from '../assets/videos/video.mp4'
+import Video2 from "../assets/videos/new_video.mp4";
 
 export default function ScrollVideo() {
   const [videoHasEnded, setVideoHasEnded] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [containerHeight, setContainerHeight] = useState("100vh");
-  const [isLoaded, setIsLoaded] = useState(false); 
+  const [isLoaded, setIsLoaded] = useState(false);
   const videoRef = useRef(null);
   const containerRef = useRef(null);
-
 
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
-     
       video.load();
 
-     
       const preloadVideo = async () => {
         try {
-          
           await video.play();
           video.pause();
           video.currentTime = 0;
@@ -62,11 +58,21 @@ export default function ScrollVideo() {
       const container = containerRef.current;
       if (container) {
         const rect = container.getBoundingClientRect();
-        setIsSticky(
-          rect.top < window.innerHeight && rect.bottom > 0 && !videoHasEnded
-        );
+        const windowHeight = window.innerHeight;
+
+        const isVisible =
+          rect.top <= windowHeight * 0.2 && rect.bottom >= windowHeight * 0.2;
+        const isOut =
+          videoHasEnded && rect.top <= -windowHeight * 0.8;
+
+        setIsSticky(isVisible && !videoHasEnded);
+
+      
+        if (isOut) {
+          setVideoHasEnded(false);
+        }
       }
-    }
+    };
 
     window.addEventListener("scroll", handleIntersection);
     return () => window.removeEventListener("scroll", handleIntersection);
@@ -135,7 +141,6 @@ export default function ScrollVideo() {
         <video
           ref={videoRef}
           src={Video2}
-          // src="https://video.zoyero.com/Lorev_EDIT_4.mp4"
           muted
           playsInline
           preload="auto"
@@ -165,5 +170,3 @@ const VideoWrapper = styled.div`
   left: 0;
   z-index: 10;
 `;
-
-
