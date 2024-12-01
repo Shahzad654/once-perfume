@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
-import Video from "../assets/videos/bridge.mp4";
 import Video2 from "../assets/videos/new_video.mp4";
 
 export default function ScrollVideo() {
@@ -165,7 +164,7 @@ const VideoWrapper = styled.div`
   width: 100%;
   height: ${(props) => (props.isSticky ? "100vh" : props.containerHeight)};
   position: ${(props) =>
-    props.isSticky && !props.hasEnded ? "fixed" : "relative"};
+    props.isSticky && !props.hasEnded ? "sticky" : "relative"};
   top: ${(props) => (props.isSticky && !props.hasEnded ? "0" : "auto")};
   left: 0;
   z-index: 10;
