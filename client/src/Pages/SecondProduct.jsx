@@ -54,9 +54,13 @@ const StyledProduct = styled.div`
 
   @media (max-width: 640px) {
     .product4_container {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
       h1 {
         font-size: 2rem;
         margin-top: 2rem;
+        text-align: center;
       }
     }
   }
