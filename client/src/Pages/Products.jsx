@@ -540,6 +540,7 @@ const StyledProducts2 = styled.div`
         }
         
         p {
+          width: 90%;
           text-align: center;
         }
       }
