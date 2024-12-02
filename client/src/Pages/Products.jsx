@@ -412,12 +412,12 @@ const StyledProducts = styled.div`
   @media (max-width: 640px) {
     .product_container {
       .product_content {
-        flex-basis: 100%;
+        flex-basis: 90%;
         justify-content: center;
         align-items: center;
         padding-left: 0;
         padding-right: 0;
-        width: 90%;
+      
         margin: auto;
         h1 {
           text-align: center;
@@ -523,12 +523,12 @@ const StyledProducts2 = styled.div`
     .product_container {
       flex-direction: column-reverse;
       .product_content {
-        flex-basis: 100%;
+        flex-basis: 90%;
         justify-content: center;
         align-items: center;
         padding-left: 0;
         padding-right: 0;
-        width: 90%;
+        
         margin: auto;
         /* margin-top: 120px; */
         h1 {
@@ -638,12 +638,12 @@ const StyledProducts3 = styled.div`
   @media (max-width: 640px) {
     .product_container {
       .product_content {
-        flex-basis: 100%;
+        flex-basis: 90%;
         justify-content: center;
         align-items: center;
         padding-left: 0;
         padding-right: 0;
-        width: 90%;
+        
         margin: auto;
         h1 {
           text-align: center;
