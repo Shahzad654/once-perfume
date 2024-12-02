@@ -391,8 +391,7 @@ const StyledProducts = styled.div`
           text-fill-color: transparent;
         }
       }
-      
-     
+
       p {
         font-size: 1rem;
         max-width: 38ch;
@@ -417,12 +416,16 @@ const StyledProducts = styled.div`
         justify-content: center;
         align-items: center;
         padding-left: 0;
+        padding-right: 0;
+        width: 90%;
+        margin: auto;
         h1 {
           text-align: center;
           font-size: 3rem;
         }
-        h5 {
-          font-size: 1.5rem;
+        h2 {
+          
+          text-align: center;
         }
         p {
           text-align: center;
@@ -524,10 +527,16 @@ const StyledProducts2 = styled.div`
         justify-content: center;
         align-items: center;
         padding-left: 0;
+        padding-right: 0;
+        width: 90%;
+        margin: auto;
         /* margin-top: 120px; */
         h1 {
           text-align: center;
           font-size: 3rem;
+        }
+        h2{
+          text-align: center;
         }
         
         p {
@@ -603,6 +612,7 @@ const StyledProducts3 = styled.div`
           text-fill-color: transparent;
         }
       }
+
       h5 {
         font-weight: bold;
         font-size: 2rem;
@@ -632,12 +642,15 @@ const StyledProducts3 = styled.div`
         justify-content: center;
         align-items: center;
         padding-left: 0;
+        padding-right: 0;
+        width: 90%;
+        margin: auto;
         h1 {
           text-align: center;
           font-size: 3rem;
         }
-        h5 {
-          font-size: 1.5rem;
+        h2 {
+          text-align: center;
         }
         p {
           text-align: center;
