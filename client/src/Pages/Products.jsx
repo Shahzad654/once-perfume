@@ -501,6 +501,10 @@ const StyledProducts2 = styled.div`
         }
       }
 
+      h2 {
+        text-align: end;
+      }
+
       p {
         font-size: 1rem;
         max-width: 38ch;
