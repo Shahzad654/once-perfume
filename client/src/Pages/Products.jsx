@@ -493,18 +493,18 @@ const StyledProducts2 = styled.div`
       h1 {
         max-width: 15ch;
         font-size: 5rem;
-        text-align: right;
+        text-align: end;
         span {
           color: transparent;
           -webkit-text-stroke: 1px white;
           text-fill-color: transparent;
         }
       }
-      
 
       p {
         font-size: 1rem;
         max-width: 38ch;
+        text-align: end;
       }
     }
 
@@ -523,24 +523,23 @@ const StyledProducts2 = styled.div`
     .product_container {
       flex-direction: column-reverse;
       .product_content {
-        flex-basis: 90%;
+        flex-basis: 100%;
         justify-content: center;
         align-items: center;
         padding-left: 0;
         padding-right: 0;
-        
         margin: auto;
         /* margin-top: 120px; */
         h1 {
           text-align: center;
           font-size: 3rem;
         }
-        h2{
+        h2 {
           text-align: center;
         }
-        
+
         p {
-          width: 90%;
+          /* width: 90%; */
           text-align: center;
         }
       }
@@ -551,6 +550,16 @@ const StyledProducts2 = styled.div`
   }
 
   @media (min-width: 640px) and (max-width: 1024px) {
+    .product_container {
+      .product_content {
+        h1 {
+          font-size: 4rem;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 640px) and (max-width: 760px) {
     .product_container {
       .product_content {
         h1 {
