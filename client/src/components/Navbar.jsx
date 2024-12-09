@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import Logo from "../assets/images/logo.webp";
+import Logo from "../assets/images/logo.jpg";
 import { CiSearch, CiUser } from "react-icons/ci";
 import { LiaShoppingBagSolid } from "react-icons/lia";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -102,7 +102,7 @@ const StyledNavbar = styled.div`
       img {
         padding-top: 10px;
         padding-bottom: 10px;
-        padding-left: 15%;
+        padding-left: 12%;
       }
     }
 
@@ -154,6 +154,12 @@ const StyledNavbar = styled.div`
         .icon {
           display: none;
         }
+      }
+
+      .logo_container{
+         img {
+        padding-left: 0;
+      }
       }
     }
 
