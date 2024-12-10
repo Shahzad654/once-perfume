@@ -40,7 +40,7 @@ export default function Products() {
             }
           });
         },
-        { threshold: 0.2 }
+        { threshold: 0.23 }
       );
 
       if (productsWrapperRef.current) {

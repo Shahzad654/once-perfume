@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Logo from "../assets/images/logo.jpg";
 import { CiSearch, CiUser } from "react-icons/ci";
@@ -13,53 +13,56 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 
 export default function Navbar() {
-     const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-     const toggleDrawer = (newOpen) => () => {
-       setOpen(newOpen);
-     };
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
 
-     const DrawerList = (
-       <Box
-         sx={{ width: 250 }}
-         role="presentation"
-         onClick={toggleDrawer(false)}
-       >
-         <List>
-           {[
-             "SHOP",
-             "DISCOVERY SET",
-             "GIFT CARD",
-             "ONCENESS",
-             "CONTATTACI",
-             "IT/EN",
-           ].map((text, index) => (
-             <ListItem key={text} disablePadding>
-               <ListItemButton>
-                 <ListItemText
-                   primary={text}
-                   sx={{ fontFamily: " regularbook" }}
-                 />
-               </ListItemButton>
-             </ListItem>
-           ))}
-         </List>
-         <Divider />
-       </Box>
-     );
+  const DrawerList = (
+    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+      <List>
+        {[
+          "SHOP",
+          "DISCOVERY SET",
+          "GIFT CARD",
+          "ONCENESS",
+          "CONTATTACI",
+          "IT/EN",
+        ].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemText
+                primary={text}
+                sx={{ fontFamily: " regularbook" }}
+              />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+    </Box>
+  );
   return (
     <StyledNavbar>
       <div className="navbar_container">
         <div className="mobile-navbar">
-         
-            <GiHamburgerMenu
-              onClick={toggleDrawer(true)}
-              style={{ width: "30px", height: "30px", cursor:"pointer" }}
-            />
-        
+          <GiHamburgerMenu
+            onClick={toggleDrawer(true)}
+            style={{ width: "30px", height: "30px", cursor: "pointer" }}
+          />
+
           <Drawer open={open} onClose={toggleDrawer(false)}>
             {DrawerList}
           </Drawer>
+        </div>
+        <div className="nav_links">
+          <a href="">SHOP</a>
+          <a href="">DISCOVERY SET</a>
+          {/* <a href="">GIFT CARD</a> */}
+          <a href="">ONCENESS</a>
+          <a href="">CONTATTACI</a>
+          {/* <a href="">IT/EN</a> */}
         </div>
         <div className="logo_container">
           <img src={Logo} alt="Logo" />
@@ -71,14 +74,14 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="nav_links">
+      {/* <div className="nav_links">
         <a href="">SHOP</a>
         <a href="">DISCOVERY SET</a>
         <a href="">GIFT CARD</a>
         <a href="">ONCENESS</a>
         <a href="">CONTATTACI</a>
         <a href="">IT/EN</a>
-      </div>
+      </div> */}
     </StyledNavbar>
   );
 }
@@ -88,7 +91,7 @@ const StyledNavbar = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    /* width: 100%; */
 
     .mobile-navbar {
       display: none;
@@ -96,13 +99,16 @@ const StyledNavbar = styled.div`
 
     .logo_container {
       flex-grow: 1;
-      display: flex;
+      /* display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: center; */
       img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         padding-top: 10px;
         padding-bottom: 10px;
-        padding-left: 12%;
+        /* padding-right: 12%; */
       }
     }
 
@@ -124,15 +130,16 @@ const StyledNavbar = styled.div`
   }
 
   .nav_links {
-    width: 50%;
+    width: 40%;
     margin: auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: start;
+    align-items: flex-start;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-top: 15px;
-    padding-bottom: 2%;
+    padding-left: 2%;
+    /* margin-top: 15px;
+    padding-bottom: 2%; */
 
     a {
       font-weight: bold;
@@ -156,10 +163,15 @@ const StyledNavbar = styled.div`
         }
       }
 
-      .logo_container{
-         img {
-        padding-left: 0;
-      }
+      .logo_container {
+        display: flex;
+          justify-content: center;
+          align-items: center;
+        img {
+          
+
+          padding-left: 0;
+        }
       }
     }
 
