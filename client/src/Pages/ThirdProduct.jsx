@@ -16,6 +16,7 @@ export default function ThirdProduct() {
                 WebkitTextStroke: "2px white",
                 textFillColor: "transparent",
                 fontSize: "18rem",
+                fontFamily: "regularbook"
               }}
             >
               Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume

@@ -111,6 +111,7 @@ export default function Products() {
                 textFillColor: "transparent",
                 fontSize: "18rem",
                 opacity: "0.4",
+                fontFamily: "regularbook"
               }}
             >
               Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
@@ -186,6 +187,7 @@ export default function Products() {
                 textFillColor: "transparent",
                 fontSize: "18rem",
                 opacity: "0.4",
+                fontFamily: "regularbook"
               }}
             >
               Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
@@ -260,6 +262,7 @@ export default function Products() {
                 textFillColor: "transparent",
                 fontSize: "18rem",
                 opacity: "0.4",
+                fontFamily: "regularbook"
               }}
             >
               Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume

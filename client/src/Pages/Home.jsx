@@ -15,6 +15,7 @@ export default function Home() {
             style={{
               fontSize: "8rem",
               color: "white",
+              fontFamily:"regularbook"
             }}
           >
             Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
@@ -28,6 +29,7 @@ export default function Home() {
               WebkitTextStroke: "0.8px white",
               textFillColor: "transparent",
               fontSize: "8rem",
+              fontFamily: "regularbook"
             }}
           >
             Once Perfume Once Perfume Once Perfume Once Perfume Once Perfume
