@@ -6,12 +6,12 @@
 
 @font-face {
   font-family: regular;
-  src: url(./assets/fonts/Gotham-Black.woff2);
+  src: url(./assets/gotham/Gotham-Font/Gotham-Black.otf);
 }
 
 @font-face {
   font-family: regularbook;
-  src: url(./assets/fonts/Gotham-Book.woff2);
+  src: url(./assets/gotham/Gotham-Font/Gotham-Bold.otf);
 }
 
 *{
